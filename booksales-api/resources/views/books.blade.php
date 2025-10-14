@@ -1,20 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Books</title>
+    <title>Daftar Buku</title>
 </head>
 <body>
-    <h1>Hello world!</h1>
-    <p>Selamat datang di toko Booksales!</p>
-
-    @foreach ($books as $item)
-    <ul>
-        <li>{{ $item['title'] }}</li>
-        <li>{{ $item['description'] }}</li>
-        <li>{{ $item['price'] }}</li>
-        <li>{{ $item['stock'] }}</li>
-    </ul>
-    @endforeach
+    <h1>Daftar Buku</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Judul</th>
+                <th>Penulis</th>
+                <th>Genre</th>
+                <th>Harga</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($books as $book)
+                <tr>
+                    <td>{{ $book->title }}</td>
+                    <td>{{ $book->author->name }}</td>
+                    <td>{{ $book->genre->name }}</td>
+                    <td>Rp {{ number_format($book->price, 2, ',', '.') }}</td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
 </body>
+</html>

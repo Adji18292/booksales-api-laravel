@@ -3,19 +3,17 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Author extends Model
 {
-    private $authors = [
-        ['id' => 1, 'name' => 'Tere Liye', 'country' => 'Indonesia'],
-        ['id' => 2, 'name' => 'Andrea Hirata', 'country' => 'Indonesia'],
-        ['id' => 3, 'name' => 'Pramoedya Ananta Toer', 'country' => 'Indonesia'],
-        ['id' => 4, 'name' => 'J.K. Rowling', 'country' => 'United Kingdom'],
-        ['id' => 5, 'name' => 'Haruki Murakami', 'country' => 'Japan'],
-    ];
+    use HasFactory;
 
-    public function getAuthors()
+    protected $fillable = ['name', 'bio'];
+
+    public function books(): HasMany
     {
-        return $this->authors;
+        return $this->hasMany(Book::class);
     }
 }

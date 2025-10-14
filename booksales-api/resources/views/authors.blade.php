@@ -9,10 +9,10 @@
     <h1>Daftar Penulis</h1>
 
     @foreach ($authors as $item)
-    <ul>
-        <li>Nama: {{ $item['name'] }}</li>
-        <li>Negara: {{ $item['country'] }}</li>
-    </ul>
+        <ul>
+            <li>Nama: {{ $item->name }}</li>
+            <li>Bio: {{ $item->bio }}</li>
+        </ul>
     @endforeach
 </body>
 </html>

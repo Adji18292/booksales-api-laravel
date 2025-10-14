@@ -3,23 +3,24 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Book extends Model
 {
-    private $books = [
-        [
-            'title' => 'Pulang',
-            'description' => 'Petualangan pulang ke kampung halaman',
-            'price' => 40000,
-            'stock' => 15,
-            'cover_photo' => 'https://example.com/pulang.jpg',
-            'genre_id' => 1,
-            'author_id' => 1,
-        ],
+    use HasFactory;
+
+    protected $fillable = [
+        'author_id', 'genre_id', 'title', 'description', 'price'
     ];
 
-    public function getBooks()
+    public function author(): BelongsTo
     {
-        return $this->books;
+        return $this->belongsTo(Author::class);
+    }
+
+    public function genre(): BelongsTo
+    {
+        return $this->belongsTo(Genre::class);
     }
 }

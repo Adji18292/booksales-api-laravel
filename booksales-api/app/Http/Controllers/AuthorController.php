@@ -9,8 +9,7 @@ class AuthorController extends Controller
 {
     public function index()
     {
-        $data = new Author();
-        $authors = $data->getAuthors();
-        return view('authors', ['authors' => $authors]);
+        $authors = Author::all(); // Mengambil semua data penulis dari database
+        return view('authors', ['authors' => $authors]); // Mengirim data ke view
     }
 }
