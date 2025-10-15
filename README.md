@@ -1,1 +1,1 @@
-Pnegumpulan tugas laravel, untuk melihat tugas sebelumnya yang saya kerjakan bisa dilihat di commit! >_<
+Pnegumpulan tugas laravel, untuk melihat tugas sebelumnya yang saya kerjakan bisa dilihat di history commit! >_<
