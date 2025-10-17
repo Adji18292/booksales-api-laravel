@@ -1,16 +1,17 @@
 <?php
 
-use App\Http\Controllers\BookController;
 use App\Http\Controllers\AuthorController;
+use App\Http\Controllers\BookController;
 use App\Http\Controllers\GenreController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/user', function (Request $request) {
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
-})->middleware('auth:sanctum');
+});
 
+// Route untuk Books, Genres, dan Authors
 Route::get('/books', [BookController::class, 'index']);
-Route::get('/genres', [GenreController::class, 'index']);
-Route::get('/authors', [AuthorController::class, 'index']);
 
+Route::apiResource('/genres', GenreController::class);
+Route::apiResource('/authors', AuthorController::class);
