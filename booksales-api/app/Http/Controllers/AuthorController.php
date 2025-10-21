@@ -13,6 +13,7 @@ class AuthorController extends Controller
     public function index()
     {
         $authors = Author::all();
+ 
         return response()->json($authors);
     }
 
@@ -22,7 +23,7 @@ class AuthorController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'name' => 'required|string|max:255',
+            'name' => 'required|string|max:255|unique:authors,name',
             'bio' => 'nullable|string',
         ]);
 
@@ -34,49 +35,31 @@ class AuthorController extends Controller
     /**
      * Menampilkan data author tertentu.
      */
-    public function show($id)
+    public function show(Author $author)
     {
-        $author = Author::find($id);
-
-        if (!$author) {
-            return response()->json(['message' => 'Author not found'], 404);
-        }
-
         return response()->json($author);
     }
 
     /**
      * Memperbarui data author.
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Author $author)
     {
-        $author = Author::find($id);
-
-        if (!$author) {
-            return response()->json(['message' => 'Author not found'], 404);
-        }
-
         $validatedData = $request->validate([
-            'name' => 'required|string|max:255',
+            'name' => 'required|string|max:255|unique:authors,name,' . $author->id,
             'bio' => 'nullable|string',
         ]);
-
+ 
         $author->update($validatedData);
-
+ 
         return response()->json($author);
     }
 
     /**
      * Menghapus data author.
      */
-    public function destroy($id)
+    public function destroy(Author $author)
     {
-        $author = Author::find($id);
-
-        if (!$author) {
-            return response()->json(['message' => 'Author not found'], 404);
-        }
-
         $author->delete();
 
         return response()->json(['message' => 'Author deleted successfully'], 200);
