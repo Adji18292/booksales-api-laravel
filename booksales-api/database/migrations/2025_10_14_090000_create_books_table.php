@@ -16,8 +16,10 @@ return new class extends Migration
             $table->foreignId('author_id')->constrained('authors')->onDelete('cascade');
             $table->foreignId('genre_id')->constrained('genres')->onDelete('cascade');
             $table->string('title');
-            $table->text('description');
-            $table->decimal('price', 8, 2);
+            $table->text('description')->nullable(); 
+            $table->decimal('price', 10, 2); 
+            $table->integer('stock')->default(10);
+            $table->string('cover_photo')->nullable(); 
             $table->timestamps();
         });
     }
