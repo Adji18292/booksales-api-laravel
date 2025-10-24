@@ -37,10 +37,13 @@ const router = createBrowserRouter([
       { index: true, element: <AdminBooks /> }, // Halaman default untuk /admin
       { path: "books", element: <AdminBooks /> },
       { path: "books/create", element: <AdminBookCreate /> },
+      { path: "books/edit/:id", element: <AdminBookCreate /> }, // Menggunakan komponen yang sama untuk edit
       { path: "genres", element: <AdminGenres /> },
       { path: "genres/create", element: <AdminGenreCreate /> },
+      { path: "genres/edit/:id", element: <AdminGenreCreate /> }, // Menggunakan komponen yang sama untuk edit
       { path: "authors", element: <AdminAuthors /> },
       { path: "authors/create", element: <AdminAuthorCreate /> },
+      { path: "authors/edit/:id", element: <AdminAuthorCreate /> }, // Menggunakan komponen yang sama untuk edit
       { path: "transactions", element: <AdminTransactions /> },
     ],
   },

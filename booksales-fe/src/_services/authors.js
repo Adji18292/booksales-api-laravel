@@ -24,3 +24,17 @@ export const deleteAuthor = async (id) => {
         throw error;
     }
 };
+
+export const getAuthor = async (id) => {
+    try {
+        const { data } = await API.get(`/authors/${id}`);
+        return data;
+    } catch (error) {
+        throw error.response || error;
+    }
+};
+
+export const updateAuthor = async (id, authorData) => {
+    const { data } = await API.put(`/authors/${id}`, authorData);
+    return data;
+};

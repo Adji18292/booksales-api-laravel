@@ -59,7 +59,10 @@ export default function AdminAuthors() {
                                         <th scope="row" className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                             {author.name}
                                         </th>
-                                        <td className="flex items-center justify-end px-4 py-3">
+                                        <td className="flex items-center justify-end px-4 py-3 space-x-2">
+                                            <Link to={`/admin/authors/edit/${author.id}`} className="text-indigo-600 hover:text-indigo-900 dark:text-indigo-500 dark:hover:text-indigo-700">
+                                                Edit
+                                            </Link>
                                             <button onClick={() => handleDeleteAuthor(author.id)} className="text-red-600 hover:text-red-900 dark:text-red-500 dark:hover:text-red-700">
                                                 Delete
                                             </button>

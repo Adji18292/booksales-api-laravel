@@ -166,12 +166,12 @@ export default function AdminBooks() {
                           aria-labelledby="apple-imac-27-dropdown-button"
                         >
                           <li>
-                            <a
-                              href="#"
+                            <Link
+                              to={`/admin/books/edit/${book.id}`}
                               className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                             >
                               Edit
-                            </a>
+                            </Link>
                           </li>
                         </ul>
                         <div className="py-1">

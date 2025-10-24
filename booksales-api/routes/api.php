@@ -31,7 +31,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/transactions/{transaction}', [TransactionController::class, 'show']);
     Route::put('/transactions/{transaction}', [TransactionController::class, 'update']);
     
-    Route::apiResource('authors', AuthorController::class)->except(['index', 'show'])->middleware('role:admin');
-    Route::apiResource('genres', GenreController::class)->except(['index', 'show'])->middleware('role:admin');
-    Route::apiResource('books', BookController::class)->except(['index', 'show'])->middleware('role:admin'); // Operasi CRUD buku untuk admin
+    Route::apiResource('authors', AuthorController::class)->except(['index'])->middleware('role:admin');
+    Route::apiResource('genres', GenreController::class)->except(['index'])->middleware('role:admin');
+    Route::apiResource('books', BookController::class)->except(['index', 'show'])->middleware('role:admin'); 
 });

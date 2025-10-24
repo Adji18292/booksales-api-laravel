@@ -24,3 +24,17 @@ export const deleteGenre = async (id) => {
         throw error;
     }
 };
+
+export const getGenre = async (id) => {
+    try {
+        const { data } = await API.get(`/genres/${id}`);
+        return data;
+    } catch (error) {
+        throw error.response || error;
+    }
+};
+
+export const updateGenre = async (id, genreData) => {
+    const { data } = await API.put(`/genres/${id}`, genreData);
+    return data;
+};
