@@ -7,9 +7,8 @@ export default function AdminLayout() {
   const handleLogout = () => {
     // Tampilkan pesan konfirmasi sebelum logout
     if (window.confirm("Apakah Anda yakin ingin logout?")) {
-      // Hapus token dari localStorage
       localStorage.removeItem("token");
-      // Arahkan ke halaman login
+      localStorage.removeItem("user"); // Hapus juga data user
       navigate("/login");
     }
   };
@@ -54,7 +53,6 @@ export default function AdminLayout() {
                 </Link>
               </li>
             ))}
-            {/* Tombol Logout */}
             <li>
               <button
                 onClick={handleLogout}

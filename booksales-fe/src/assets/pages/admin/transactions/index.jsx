@@ -6,6 +6,7 @@ export default function AdminTransactions() {
   const [transactions, setTransactions] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     const fetchTransactions = async () => {
@@ -34,6 +35,13 @@ export default function AdminTransactions() {
       }
     }
   };
+
+  const filteredTransactions = transactions.filter(transaction => {
+    const userNameMatch = (transaction.user?.name ?? '').toLowerCase().includes(searchTerm.toLowerCase());
+    const bookTitleMatch = (transaction.book?.title ?? '').toLowerCase().includes(searchTerm.toLowerCase());
+    const statusMatch = (transaction.status ?? '').toLowerCase().includes(searchTerm.toLowerCase());
+    return userNameMatch || bookTitleMatch || statusMatch;
+  });
 
   if (loading) {
     return <div className="p-5">Loading transactions...</div>;
@@ -73,8 +81,9 @@ export default function AdminTransactions() {
                     type="text"
                     id="simple-search"
                     className="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-indigo-500 dark:focus:border-indigo-500"
-                    placeholder="Search"
-                    required=""
+                    placeholder="Search by user, book, or status"
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
                   />
                 </div>
               </form>
@@ -110,13 +119,13 @@ export default function AdminTransactions() {
                 </tr>
               </thead>
               <tbody>
-                {transactions.length > 0 ? (
-                  transactions.map((transaction) => (
+                {filteredTransactions.length > 0 ? (
+                  filteredTransactions.map((transaction) => (
                     <tr key={transaction.id} className="border-b dark:border-gray-700">
                       <th scope="row" className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                        {transaction.user.name}
+                        {transaction.user?.name || "N/A"}
                       </th>
-                      <td className="px-4 py-3">{transaction.book.title}</td>
+                      <td className="px-4 py-3">{transaction.book?.title || "N/A"}</td>
                       <td className="px-4 py-3">{transaction.quantity}</td>
                       <td className="px-4 py-3">{new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(parseFloat(String(transaction.total_amount).replace(/[^0-9.]/g, '')) || 0)}</td>
                       <td className="px-4 py-3">{transaction.status}</td>

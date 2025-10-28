@@ -41,6 +41,7 @@ export default function Register() {
       const data = await register({ name, email, password, password_confirmation: passwordConfirmation });
       if (data && data.token && data.user) {
         localStorage.setItem("token", data.token);
+        localStorage.setItem("user", JSON.stringify(data.user));
         if (data.user.role === "admin") {
           navigate("/admin/books");
         } else {
@@ -59,7 +60,6 @@ export default function Register() {
             const errorMessages = errors[firstErrorKey][0];
             setError(errorMessages);
           } else if (err.response.data) {
-            // Menangani kasus di mana backend mengembalikan { "email": ["The email has already been taken."] }
             const errorKey = Object.keys(err.response.data)[0];
             setError(err.response.data[errorKey][0]);
           } else {

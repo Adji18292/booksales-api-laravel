@@ -12,20 +12,20 @@ export default function Login() {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    setError(""); // Reset error message
+    setError("");
 
     try {
       const data = await login({ email, password });
       if (data && data.token && data.user) {
         // Simpan token ke localStorage setelah login berhasil
         localStorage.setItem("token", data.token);
+        // Simpan juga informasi user (termasuk role)
+        localStorage.setItem("user", JSON.stringify(data.user));
 
         // Cek apakah user adalah admin berdasarkan role
         if (data.user.role === "admin") {
-          // Arahkan ke halaman admin
           navigate("/admin/books");
         } else {
-          // Arahkan ke halaman public (halaman utama)
           navigate("/");
         }
       } else {

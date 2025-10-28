@@ -8,6 +8,7 @@ export default function AdminBooks() {
     const [books, setBooks] = useState([]);
     const [genres, setGenres] = useState([]);
     const [authors, setAuthors] = useState([]);
+    const [searchTerm, setSearchTerm] = useState("");
 
     useEffect(() => {
         const fetchData = async () => {
@@ -33,6 +34,15 @@ export default function AdminBooks() {
         const author = authors.find((author) => author.id === id);
         return author ? author.name : "Unknown";
     }
+
+    const filteredBooks = books.filter(book => {
+        const titleMatch = book.title.toLowerCase().includes(searchTerm.toLowerCase());
+        const genreName = getGenreName(book.genre_id).toLowerCase();
+        const genreMatch = genreName.includes(searchTerm.toLowerCase());
+        const authorName = getAuthorName(book.author_id).toLowerCase();
+        const authorMatch = authorName.includes(searchTerm.toLowerCase());
+        return titleMatch || genreMatch || authorMatch;
+    });
 
   return (
     <>
@@ -64,8 +74,9 @@ export default function AdminBooks() {
                       type="text"
                       id="simple-search"
                       className="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-indigo-500 dark:focus:border-indigo-500"
-                      placeholder="Search"
-                      required=""
+                      placeholder="Search by title, genre, or author"
+                      value={searchTerm}
+                      onChange={(e) => setSearchTerm(e.target.value)}
                     />
                   </div>
                 </form>
@@ -119,8 +130,8 @@ export default function AdminBooks() {
                 </thead>
                 <tbody>
 
-                  { books.length > 0 ?
-                  books.map((book) => (
+                  { filteredBooks.length > 0 ?
+                  filteredBooks.map((book) => (
 
                   <tr key={book.id} className="border-b dark:border-gray-700">
                     <th
@@ -132,7 +143,7 @@ export default function AdminBooks() {
                     <td className="px-4 py-3">{new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(book.price)}</td>
                     <td className="px-4 py-3">{book.stock}</td>
                     <td className="px-4 py-3">
-                        <img src={book.cover} alt={book.title} className="w-10 h-10 object-cover" />
+                        <img src={`https://picsum.photos/seed/${book.id}/100/150`} alt={book.title} className="object-cover w-10 h-10 rounded" />
                     </td>
                     <td className="px-4 py-3">
                         {getGenreName(book.genre_id)}

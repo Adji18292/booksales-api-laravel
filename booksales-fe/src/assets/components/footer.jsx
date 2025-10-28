@@ -1,9 +1,9 @@
 export default function Footer() {
   return (
     <>
-      <footer className="border-t-2 p-4 bg-white md:p-8 lg:p-10 dark:bg-gray-800">
-        <div className="mx-auto max-w-screen-xl text-center">
-          <ul className="flex flex-wrap justify-center items-center mb-6 text-gray-900 dark:text-white">
+      <footer className="p-4 bg-white border-t-2 md:p-8 lg:p-10 dark:bg-gray-800">
+        <div className="max-w-screen-xl mx-auto text-center">
+          <ul className="flex flex-wrap items-center justify-center mb-6 text-gray-900 dark:text-white">
             <li>
               <a href="#" className="mr-4 hover:underline md:mr-6 ">
                 About
@@ -41,11 +41,11 @@ export default function Footer() {
             </li>
           </ul>
           <span className="text-sm text-gray-500 sm:text-center dark:text-gray-400">
-            ©{" "}
+            © {new Date().getFullYear()}{" "}
             <a href="#" className="hover:underline">
-              2025
+              Bookstore™
             </a>
-            . All Rights Reserved.
+            . All rights reserved.
           </span>
         </div>
       </footer>
