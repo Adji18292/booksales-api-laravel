@@ -18,7 +18,7 @@ export default function AdminAuthors() {
         if (window.confirm("Are you sure you want to delete this author?")) {
             try {
                 await deleteAuthor(id);
-                fetchAuthors(); // Refresh data
+                fetchAuthors();
             } catch (error) {
                 console.error("Failed to delete author:", error);
             }

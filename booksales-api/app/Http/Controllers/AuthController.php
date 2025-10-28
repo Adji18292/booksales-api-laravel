@@ -11,7 +11,7 @@ use Illuminate\Validation\ValidationException;
 class AuthController extends Controller
 {
     /**
-     * Mendaftarkan user baru.
+     * Mendaftarkan user baru dan langsung memberikan token (auto-login).
      */
     public function register(Request $request)
     {
@@ -28,11 +28,16 @@ class AuthController extends Controller
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => $request->password, // Hashing otomatis oleh model User
+            'password' => $request->password, 
         ]);
 
+        // Buat token untuk user yang baru mendaftar
+        $token = $user->createToken('api-token')->plainTextToken;
+
+        // Kembalikan data user dan token
         return response()->json([
-            'message' => 'Registrasi berhasil. Silakan login.'
+            'user'  => $user,
+            'token' => $token
         ], 201);
     }
 
@@ -48,15 +53,19 @@ class AuthController extends Controller
 
         $user = User::where('email', $request->email)->first();
 
-        if (! $user || ! Hash::check($request->password, $user->password)) {
+        if (!$user || !Hash::check($request->password, $user->password)) {
             throw ValidationException::withMessages([
                 'email' => ['Kredensial yang diberikan tidak cocok dengan catatan kami.'],
-                
             ]);
         }
 
+        // Buat token untuk user yang login
+        $token = $user->createToken('api-token')->plainTextToken;
+
+        // Kembalikan data user dan token
         return response()->json([
-            'token' => $user->createToken('api-token')->plainTextToken
+            'user'  => $user,
+            'token' => $token
         ]);
     }
 

@@ -28,22 +28,22 @@ const router = createBrowserRouter([
   },
   {
     path: "/register", // Tambahkan rute untuk halaman register
-    element: <Register />,
+    element: <Register />, // Rute untuk halaman register
   },
   {
     path: "/admin",
     element: <AdminLayout />,
     children: [
-      { index: true, element: <AdminBooks /> }, // Halaman default untuk /admin
+      { index: true, element: <AdminBooks /> },
       { path: "books", element: <AdminBooks /> },
       { path: "books/create", element: <AdminBookCreate /> },
-      { path: "books/edit/:id", element: <AdminBookCreate /> }, // Menggunakan komponen yang sama untuk edit
+      { path: "books/edit/:id", element: <AdminBookCreate /> },
       { path: "genres", element: <AdminGenres /> },
       { path: "genres/create", element: <AdminGenreCreate /> },
-      { path: "genres/edit/:id", element: <AdminGenreCreate /> }, // Menggunakan komponen yang sama untuk edit
+      { path: "genres/edit/:id", element: <AdminGenreCreate /> },
       { path: "authors", element: <AdminAuthors /> },
       { path: "authors/create", element: <AdminAuthorCreate /> },
-      { path: "authors/edit/:id", element: <AdminAuthorCreate /> }, // Menggunakan komponen yang sama untuk edit
+      { path: "authors/edit/:id", element: <AdminAuthorCreate /> },
       { path: "transactions", element: <AdminTransactions /> },
     ],
   },

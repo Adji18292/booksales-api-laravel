@@ -1,7 +1,6 @@
 import axios from "axios";
 
 const api = axios.create({
-    // baseURL: "https://akmal-bc.karyakreasi.id/api",
     baseURL: "http://127.0.0.1:8000/api",
   },
 );
@@ -25,9 +24,7 @@ api.interceptors.response.use(
   },
   (error) => {
     if (error.response && error.response.status === 401) {
-      // Jika error 401 (Unauthorized), token tidak valid
-      localStorage.removeItem("token"); // Hapus token dari penyimpanan
-      // Arahkan kembali ke halaman login
+      localStorage.removeItem("token");
       if (window.location.pathname !== "/login") {
         window.location.href = "/login";
       }

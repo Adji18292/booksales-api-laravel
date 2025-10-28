@@ -16,7 +16,7 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::get('/authors', [AuthorController::class, 'index']);
 Route::get('/genres', [GenreController::class, 'index']);
 Route::get('/books', [BookController::class, 'index']);
-Route::get('/books/{book}', [BookController::class, 'show']); // Menampilkan detail satu buku secara publik
+Route::get('/books/{book}', [BookController::class, 'show']); 
 
 // Rute yang memerlukan autentikasi
 Route::middleware('auth:sanctum')->group(function () {

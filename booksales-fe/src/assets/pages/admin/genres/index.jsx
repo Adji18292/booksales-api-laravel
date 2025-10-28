@@ -18,7 +18,7 @@ export default function AdminGenres() {
         if (window.confirm("Are you sure you want to delete this genre?")) {
             try {
                 await deleteGenre(id);
-                fetchGenres(); // Refresh data
+                fetchGenres();
             } catch (error) {
                 console.error("Failed to delete genre:", error);
             }
